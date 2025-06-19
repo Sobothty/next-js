@@ -1,15 +1,10 @@
 export type ProductType = {
     id : number;
     title : string;
-    slug : string;
+    brand : string;
     description : string;
     category : string;
-    image_url : string;
+    images : string;
     price : number;
 }
 
-export type Param = {
-  params: {
-    id: string;
-  };
-};

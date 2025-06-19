@@ -1,21 +1,20 @@
 import Image from "next/image";
 import React from "react";
-import { product } from "@/data/productData";
-import { Param } from "@/types/productType";
+import { Param } from "@/types/paramsType";
 
-
-const page = ({ params }: Param) => {
+const page = async ({ params }: Param) => {
   console.log("Product ID:", params.id);
 
-  const productDetails = product.find(
-    (item) => item.id === parseInt(params.id)
-  );
+  const product = `${process.env.BASE_URL}/${params.id}`;
 
-  if (!productDetails) {
+  if (!product) {
     return <div className="text-center text-red-500">Product not found</div>;
   }
 
-  
+  const res = await fetch(product);
+  const productData = await res.json();
+  console.log("Product Data:", productData);
+
   return (
     <div className="w-full h-screen flex-col md:flex-row justify-between flex gap-4 items-start mx-4 p-12">
       <div className="w-full flex bg-white rounded-lg shadow dark:bg-gray-800 flex-col md:flex-row">
@@ -25,7 +24,7 @@ const page = ({ params }: Param) => {
             height={200}
             unoptimized
             src={
-              productDetails?.image_url ||
+              productData?.thumbnail ||
               "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"
             }
             alt="shopping image"
@@ -35,13 +34,13 @@ const page = ({ params }: Param) => {
         <form className="flex-auto p-6">
           <div className="flex flex-wrap">
             <h1 className="flex-auto text-xl font-semibold dark:text-gray-50">
-              {productDetails?.title}
+              {productData?.title}
             </h1>
             <div className="text-xl font-semibold text-gray-500 dark:text-gray-300">
-              {productDetails?.price}
+              {productData?.price}
             </div>
             <div className="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
-              {productDetails?.category}
+              {productData?.brand}
             </div>
           </div>
           <div className="flex items-baseline mt-4 mb-6 text-gray-700 dark:text-gray-300">
