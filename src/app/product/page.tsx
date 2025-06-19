@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/product/ProductCard";
-import { getAllProducts } from "../services/product";
+import { getAllProducts } from "@/services/product";
 import React from "react";
 import Link from "next/link";
 

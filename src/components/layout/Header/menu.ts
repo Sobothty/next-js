@@ -19,4 +19,10 @@ export const navbarItems: navbarType[] = [
     title: "About",
     active: false,
   },
+  {
+    id : 4,
+    path: "/profile",
+    title: "Profile",
+    active: false,
+  }
 ];

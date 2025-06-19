@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Param } from "@/types/paramsType";
-import { getProductById } from "@/app/services/product";
+import { getProductById } from "@/services/product";
 
 const page = async ({ params }: Param) => {
   console.log("Product ID:", params.id);
