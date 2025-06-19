@@ -1,19 +1,12 @@
 import Image from "next/image";
 import React from "react";
 import { Param } from "@/types/paramsType";
+import { getProductById } from "@/app/services/product";
 
 const page = async ({ params }: Param) => {
   console.log("Product ID:", params.id);
 
-  const product = `${process.env.BASE_URL}/${params.id}`;
-
-  if (!product) {
-    return <div className="text-center text-red-500">Product not found</div>;
-  }
-
-  const res = await fetch(product);
-  const productData = await res.json();
-  console.log("Product Data:", productData);
+  const productData = await getProductById(params.id);
 
   return (
     <div className="w-full h-screen flex-col md:flex-row justify-between flex gap-4 items-start mx-4 p-12">
